@@ -7,26 +7,18 @@ const app = express();
 const dbConfig = require("./config/dbConfig");
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
-//app.use(cors({ origin: 'http://localhost:5173', }));  // Add CORS middleware
+
 // Use CORS
 app.use(
 	cors({
 		origin: [
 			"http://localhost:5173",
-			"https://dynamic-portfolio-beta.vercel.app/",
-		], // Frontend URL
+			"https://dynamic-portfolio-beta.vercel.app", // Remove trailing slash
+		], // Frontend URLs
 		methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-		credentials: true, // Enable this if you're dealing with cookies
+		credentials: false, // Enable this if you're dealing with cookies
 	})
 );
-
-// //check if the code is running in production mode or not
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "../client/build")));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../client/build/index.html"));
-//   });
-// }
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);
