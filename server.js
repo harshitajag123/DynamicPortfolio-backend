@@ -17,14 +17,18 @@ app.use(
 	})
 );
 
-//check if the code is running in production mode or not
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-  });
-}
+// //check if the code is running in production mode or not
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../client/build")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../client/build/index.html"));
+//   });
+// }
 
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).send("Something broke!");
+});
 
 //testing route
 app.get('/test',(req,res)=>{
