@@ -16,7 +16,7 @@ app.use(
 			"https://dynamic-portfolio-beta.vercel.app", // Remove trailing slash
 		], // Frontend URLs
 		methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-		credentials: false, // Enable this if you're dealing with cookies
+		credentials: true, //access-control-allow-credentials:true
 	})
 );
 
